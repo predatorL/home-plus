@@ -1,2 +1,16 @@
-# health-plus
-老李家的运动计数账本
+# home-plus
+
+## mobile-app
+> 手机应用
+
+## 
+> 图像处理
+
+## 
+> 表情包生成
+
+
+# 开发
+## 入门教程
+- https://juejin.cn/post/7067103345361567775
+- https://juejin.cn/post/6844904112010559496

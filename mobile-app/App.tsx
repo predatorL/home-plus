@@ -1,23 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { View, Text, Image, ScrollView, TextInput } from 'react-native';
 
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
-
-export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
-
-  if (!isLoadingComplete) {
-    return null;
-  } else {
-    return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
-    );
-  }
+const App = () => {
+  return (
+    <ScrollView>
+      <Text>Some text</Text>
+      <View>
+        <Text>Some more text</Text>
+        <Image
+          source={{
+            uri: require('./assets/images/bao.png'),
+          }}
+          style={{ width: 200, height: 200 }}
+        />
+      </View>
+      <TextInput
+        style={{
+          height: 40,
+          borderColor: 'gray',
+          borderWidth: 1
+        }}
+        defaultValue="You can type in me"
+      />
+    </ScrollView>
+  );
 }
+
+export default App;
