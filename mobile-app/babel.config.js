@@ -5,15 +5,11 @@ module.exports = function (api) {
     plugins: [
       'react-native-reanimated/plugin',
       [
-        "babel-plugin-root-import",
+        "babel-plugin-root-import", 
         {
-          "rootPathSuffix": "./",
           "rootPathPrefix": "~/",
+          "rootPathSuffix": "./",
         },
-        {
-          "rootPathSuffix": "./assets/images/",
-          "rootPathPrefix": "@img/",
-        }
       ]
     ],
   };
