@@ -1,0 +1,11 @@
+.menu-list {
+    display: grid;
+    grid-template-columns: auto auto;
+
+    & .menu-item {
+        width: 100%;
+        & img {
+            width: 100%;
+        }
+    }
+}
