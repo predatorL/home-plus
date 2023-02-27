@@ -1,5 +1,8 @@
 # 文档阅读笔记
 
+## 参考文档
+- https://www.prisma.io/docs
+
 ## 安装
 - npm install prisma --save-dev
 
