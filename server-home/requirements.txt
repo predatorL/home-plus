@@ -1,0 +1,12 @@
+# 生成一个flask的requirements.txt文件
+Flask>=2.3.2
+Flask-RESTful==0.3.9
+Flask-SQLAlchemy==2.5.1
+Flask-Script==2.0.6
+Flask-WTF==0.15.1
+itsdangerous>=2.1.2
+MarkupSafe>=2.1.1
+SQLAlchemy==1.4.23
+Werkzeug>=2.3.3
+WTForms==2.3.3
+
