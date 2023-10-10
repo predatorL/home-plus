@@ -10,3 +10,4 @@ SQLAlchemy==1.4.23
 Werkzeug>=2.3.3
 WTForms==2.3.3
 pymongo==4.5.0
+flask-cors>=4.0.0

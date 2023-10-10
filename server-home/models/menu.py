@@ -1,11 +1,13 @@
-from database import Database
+from app import db
 
 # 标题[string] 描述[string] 材料[list] 制作步骤[list] 备注[string] 评论 
 
-class Menu(Database):
+class Menu(db):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        # 实例化collection menu, self.collection
         self.collection = self.db.menu
+        
         self.collection.create_index([('name', 1)], unique=True)
         self.collection.create_index([('user_id', 1)], unique=True)
     def create(self, name, user_id):

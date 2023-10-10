@@ -3,14 +3,20 @@ from flask import request
 from datetime import datetime
 
 from models.menu import Menu
-from database import Database
 
 class MenuResource(Resource):
     def get(self, id):
         return {'code': 1}
     
-    def post(self, id):
-        return {'code': 1}
+    def post(self):
+        # 获取所有请求参数 data
+        data = request.get_json()
+        # 存入menu集合 data
+        name = data.get('name')
+        description = data.get('description')
+        create_time = datetime.now()
+        Menu.create(name, description, create_time)
+        return {'code': 1, 'data': data, 'message':'success'}
     
     def put(self, id):
         pass

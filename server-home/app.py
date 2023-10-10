@@ -1,16 +1,23 @@
 from flask import Flask
 from flask_restful import Api
+from flask_cors import CORS
+# config
+from config import MONGODB_SETTINGS
 # db初始化
-from database import Database
+from database import init_db
 # resources
 from resources.user import UserResource, UserListResource
 from resources.todo import TodoResource, TodolistResource
 from resources.menu import MenuResource, MenuListResource
 
 app = Flask(__name__)
+cors = CORS(app)
 
+app['config'] = {
+    'MONGODB_SETTINGS': MONGODB_SETTINGS
+}
 # init db
-Database(host='localhost', port=27017, db_name='home_plus', user='root', password='')
+db = init_db(app)
 # api
 api = Api(app)
 # api-user

@@ -22,8 +22,10 @@ export default [
     routes: [
       { path: '/menu', redirect: '/menu/index' },
       { path: '/menu/index', name: '首页', component: './menu/index' },
-      { path: '/menu/list', name: '菜谱列表', component: './menu/list/index' },
-      { path: '/menu/manage', name: '菜谱管理', component: './menu/manage/index' },
+      { path: '/menu/list', name: '列表', component: './menu/list/index' },
+      { path: '/menu/manage', name: '管理', component: './menu/manage/index' },
+      { path: '/menu/manage/create',  name: '创建', component: './menu/manage/edit' },
+      { path: '/menu/manage/edit', name: '编辑',  component: './menu/manage/edit' },
     ],
   },
   { name: '查询表格', icon: 'table', path: '/list', component: './TableList' },

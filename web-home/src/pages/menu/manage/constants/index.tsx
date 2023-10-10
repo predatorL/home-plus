@@ -20,15 +20,14 @@ export const columns: ProColumns<MenuItem>[] = [
       tip: '标题过长会自动收缩',
       formItemProps: {
         rules: [
-          {
-            required: true,
-            message: '此项为必填项',
-          },
+          // {
+          //   required: true,
+          //   message: '此项为必填项',
+          // },
         ],
       },
     },
     {
-      disable: true,
       title: '状态',
       dataIndex: 'state',
       filters: true,
@@ -37,18 +36,18 @@ export const columns: ProColumns<MenuItem>[] = [
       valueType: 'select',
       valueEnum: {
         all: { text: '全部' },
-        open: {
-          text: '未解决',
-          status: 'Error',
+        released: {
+          text: '已发布',
+          status: '1',
         },
-        closed: {
-          text: '已解决',
-          status: 'Success',
-          disabled: true,
-        },
-        processing: {
-          text: '解决中',
-          status: 'Processing',
+        // closed: {
+        //   text: '未发布',
+        //   status: 'Success',
+        //   disabled: true,
+        // },
+        unreleased: {
+          text: '未发布',
+          status: '2',
         },
       },
     },
@@ -105,7 +104,12 @@ export const columns: ProColumns<MenuItem>[] = [
         >
           编辑
         </a>,
-        <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
+        <a 
+          key="view"
+          onClick={() => {
+            action?.startEditable?.(record.id);
+          }} 
+        >
           查看
         </a>,
         <TableDropdown

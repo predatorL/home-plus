@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
-import './index.less';
+import { Link } from 'umi';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { Button, Dropdown, Space, Tag } from 'antd';
 import request from 'umi-request';
 
+import './index.less';
 import { MenuItem } from './types';
 import { columns } from './constants';
 
@@ -31,11 +32,18 @@ export default () => {
       cardBordered
       request={async (params = {}, sort, filter) => {
         console.log(sort, filter);
-        await waitTime(2000);
         return request<{
           data: MenuItem[];
-        }>('https://proapi.azurewebsites.net/github/issues', {
+        }>('http://127.0.0.1:5000/api/menu/list', {
           params,
+        }).then((res: any) => {
+          const {list = [], pagination = {}} = res.data || {};
+          console.log(res);
+          return {
+            data: list || [],
+            success: res.code === 1,
+            total: pagination.total || 0,
+          };
         });
       }}
       editable={{
@@ -79,36 +87,13 @@ export default () => {
         <Button
           key="button"
           icon={<PlusOutlined />}
-          onClick={() => {
-            actionRef.current?.reload();
-          }}
           type="primary"
         >
-          新建
+          <Link to="/menu/manage/create">
+            新建
+          </Link>
         </Button>,
-        <Dropdown
-          key="menu"
-          menu={{
-            items: [
-              {
-                label: '1st item',
-                key: '1',
-              },
-              {
-                label: '2nd item',
-                key: '1',
-              },
-              {
-                label: '3rd item',
-                key: '1',
-              },
-            ],
-          }}
-        >
-          <Button>
-            <EllipsisOutlined />
-          </Button>
-        </Dropdown>,
+        ,
       ]}
     />
   );
