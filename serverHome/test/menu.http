@@ -1,0 +1,9 @@
+POST http://localhost:5000/api/menu HTTP/1.1
+content-type: application/json
+
+{
+    "name":"Hendry",
+    "salary":"61888",
+    "age":"26",
+    "description": "12312description312312"
+}
