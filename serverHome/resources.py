@@ -15,13 +15,13 @@ class RecipeResource(Resource):
             for recipe in recipes:
                 recipe_data = {'id': recipe.id, 'name': recipe.name, 'description': recipe.description}
                 output.append(recipe_data)
-            return output
+            return {'code': 1, 'data': output}
         else:
             recipe = RecipeModel.query.get(recipe_id)
             if recipe:
-                return {'id': recipe.id, 'name': recipe.name, 'description': recipe.description}
+                return {'code': 1, 'data': recipe.to_dict()}
             else:
-                return {'message': 'Recipe not found'}, 404
+                return {'code': -1, 'message': 'Recipe not found'}, 404
 
     def post(self):
         args = parser.parse_args()
