@@ -2,7 +2,7 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { Button, Space, Tag } from 'antd';
 
-export type GithubIssueItem = {
+export type RowDataType = {
     url: string;
     id: number;
     number: number;
@@ -17,9 +17,15 @@ export type GithubIssueItem = {
     updated_at: string;
     closed_at?: string;
 };
+
+export type MenuClickType = {
+  key: string, 
+  item: RowDataType
+}
   
-const getColumns = ({listRef}) => {
-    const columns: ProColumns<GithubIssueItem>[] = [
+const getColumns = (param: {handleMenuItemClick: (param: MenuClickType) => void}) => {
+  const { handleMenuItemClick } = param;
+    const columns: ProColumns<RowDataType>[] = [
         {
           title: '标题',
           dataIndex: 'name',
@@ -114,28 +120,17 @@ const getColumns = ({listRef}) => {
           title: '操作',
           valueType: 'option',
           key: 'option',
-          render: (text, record, _, action) => [
-            <a
-              key="editable"
-              onClick={() => {
-                console.log(action)
-                listRef?.current?.toggleEditFormDisplay?.({action: 'edit', visible: true, values: record});
-              }}
-            >
-              编辑
-            </a>,
-            <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
-              查看
-            </a>,
+          render: (text, record, _, action) => (
             <TableDropdown
               key="actionGroup"
-              onSelect={() => action?.reload()}
+              onSelect={(key) => handleMenuItemClick?.({key,  item: record})}
               menus={[
-                { key: 'copy', name: '复制' },
+                { key: 'edit', name: '编辑' },
+                { key: 'view', name: '查看' },
                 { key: 'delete', name: '删除' },
               ]}
-            />,
-          ],
+            />
+          ),
         },
     ];
     return columns;

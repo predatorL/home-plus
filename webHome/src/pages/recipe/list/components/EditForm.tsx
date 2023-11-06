@@ -1,22 +1,32 @@
   import {
     DrawerForm,
     ProForm,
-    ProFormDateRangePicker,
-    ProFormSelect,
     ProFormText,
   } from '@ant-design/pro-components';
-  
-  export default (props) => {
-    const { open, onFinish, actionType, initialValues, onCancel, onOk } = props;
-  
+
+  export default (props: any) => {
+    const { onOpenChange, onFinish, actionInfo } = props;
+    const fromProp: any = {}
+    if(actionInfo.action === 'view') {
+      fromProp.submitter = {
+        render() {
+          return null
+        }
+      }
+    }
     return (
         <DrawerForm
-        labelWidth="auto"
-        open={open}
-        onFinish={(values) => {
-          onFinish(values, actionType);
+        open={actionInfo.visible}
+        onOpenChange={onOpenChange}
+        onFinish={async (values) => {
+          const res = await onFinish({actionInfo, values});
+          return true;
         }}
-        initialValues={initialValues}
+        drawerProps={{
+          destroyOnClose: true,
+        }}
+        initialValues={actionInfo.item}
+        {...fromProp}
       >
         <ProForm.Group>
           <ProFormText

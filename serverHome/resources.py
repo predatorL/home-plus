@@ -34,7 +34,7 @@ class RecipeResource(Resource):
 
     def put(self):
         args = parser.parse_args()
-        pdb.set_trace()
+        # pdb.set_trace()
         recipeId = args['recipeId']
         name = args['name']
         description = args['description']
@@ -57,3 +57,4 @@ class RecipeResource(Resource):
             return {'message': 'Recipe deleted successfully'}
         else:
             return {'message': 'Recipe not found'}
+

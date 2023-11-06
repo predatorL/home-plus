@@ -4,56 +4,68 @@ import { ProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import { useRef, useState } from 'react';
 import request from 'umi-request';
-import getColumns, { GithubIssueItem } from './components/Columns';
-export const waitTimePromise = async (time: number = 100) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
 
+import RecipeSercie from '@/services/recipe';
+import getColumns, { RowDataType, MenuClickType } from './components/Columns';
 import EditForm from './components/EditForm';
 
-export const waitTime = async (time: number = 100) => {
-  await waitTimePromise(time);
-};
+
+interface IEditFormAction {
+  visible: boolean, item?: any, action?: string
+}
 
 export default () => {
   const actionRef = useRef<ActionType | any>();
-  const listRef = useRef<any>();
-  const [drawerAction, setDrawerAction] = useState({visible: false, values: {}, action: ''});
-  
-  const columns = getColumns({actionRef, listRef});
-  const handleEditFinish = async (values: any) => {
-    console.log('handleEditFinish: ', values);
-    const res = await request('http://localhost:5000/api/recipes', 
-    { method: 'post', data: values, headers: {'Content-Type': 'application/json',}});
-    console.log(res)
+  const [editFormAction, setEditFormAction] = useState<IEditFormAction>({visible: false, item: {}, action: ''});
+  const [detailAction, setDetailAction] = useState<IEditFormAction>({visible: false, item: {}});
+
+  const handleMenuItemClick = (param: MenuClickType) => {
+    const {key, item} = param;
+    switch (key) {
+      case 'edit':
+        setEditFormAction({visible: true, item, action: 'edit'})
+        break;
+      case 'delete':
+          setEditFormAction({visible: true, item, action: 'edit'})
+        break;
+      case 'view':
+        setEditFormAction({visible: true, item, action: 'view'})
+        break;  
+      default:
+        break;
+    }
   }
 
-  const toggleEditFormDisplay = (param: {visible?: boolean, action?: string, values?: any}) => {
-    const {action = '', values = {}, visible = false} = param;
-    setDrawerAction({action, values, visible});
+  const columns = getColumns({handleMenuItemClick});
+  const handleEditFinish = async (param: {actionInfo: IEditFormAction, values: any}) => {
+    const { actionInfo, values} = param;
+    console.log('handleEditFinish: ', values);
+    const {action, item} = actionInfo;
+    const reqParam = { ...values };
+    let request = action === 'edit' ? RecipeSercie.update : RecipeSercie.create;
+    if(action === 'edit') {
+      reqParam.recipeId = item.id;
+    }
+    const res = await request(reqParam);
+    console.log(res)
+    setEditFormAction({visible: false, item: {}, action: ''})
+    return true;
   }
-  listRef.current = {
-    toggleEditFormDisplay,
+
+  const onOpenChange = (visible : boolean) => {
+    setEditFormAction({...editFormAction, visible});
   }
+ 
 
   return (
     <>
-      <ProTable<GithubIssueItem>
+      <ProTable<RowDataType>
         columns={columns}
         actionRef={actionRef}
         cardBordered
         request={async (params = {}, sort, filter) => {
-          console.log(sort, filter);
-          await waitTime(2000);
-          return request<{
-            data: GithubIssueItem[];
-          }>('http://localhost:5000/api/recipes', {
-            params,
-          }).then((res) => {
+          console.log(params, sort, filter);
+          return RecipeSercie.getList(params).then((res) => {
             return {
               data: res.data,
               success: true,
@@ -94,7 +106,7 @@ export default () => {
           <Button
             key="create"
             icon={<PlusOutlined />}
-            onClick={() => { toggleEditFormDisplay({action: 'create', visible: true}) }}
+            onClick={() => { setEditFormAction({visible: true, item: {}, action: 'create'}) }}
             type="primary"
           >
             新建
@@ -102,7 +114,7 @@ export default () => {
           ,
         ]}
       />
-      <EditForm open={drawerAction.visible} onOpenChange={() => { toggleEditFormDisplay({}) }} onFinish={handleEditFinish}  />
+      <EditForm actionInfo={editFormAction}  onOpenChange={onOpenChange} onFinish={handleEditFinish}  />
     </>
   );
 };
