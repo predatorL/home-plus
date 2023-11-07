@@ -1,7 +1,7 @@
 # 生成一个flask的requirements.txt文件
-Flask==2.3.2
+Flask==2.2.5
 Flask-RESTful==0.3.9
-Flask-SQLAlchemy==3.1.1
+Flask-SQLAlchemy==3.0.5
 Flask-WTF==1.0.0
 SQLAlchemy>=2.0.16
 WTForms==3.0.0

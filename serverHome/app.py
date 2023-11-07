@@ -8,7 +8,7 @@ from database import initialize_db, db
 app = Flask(__name__)
 cors = CORS(app)
 # db
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@local_mysql:3307/homePlus'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@localhost:3307/homePlus'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 initialize_db(app)
 # 在应用上下文中初始化数据库表
