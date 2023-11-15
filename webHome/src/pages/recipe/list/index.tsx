@@ -42,12 +42,12 @@ export default () => {
     console.log('handleEditFinish: ', values);
     const {action, item} = actionInfo;
     const reqParam = { ...values };
-    let request = action === 'edit' ? RecipeSercie.update : RecipeSercie.create;
-    if(action === 'edit') {
-      reqParam.recipeId = item.id;
-    }
-    const res = await request(reqParam);
-    console.log(res)
+    // let request = action === 'edit' ? RecipeSercie.update : RecipeSercie.create;
+    // if(action === 'edit') {
+    //   reqParam.recipeId = item.id;
+    // }
+    // const res = await request(reqParam);
+    // console.log(res)
     setEditFormAction({visible: false, item: {}, action: ''})
     return true;
   }
