@@ -368,6 +368,7 @@ export interface ApiRecipeRecipe extends Schema.CollectionType {
     singularName: 'recipe';
     pluralName: 'recipes';
     displayName: '\u98DF\u8C31';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -379,6 +380,10 @@ export interface ApiRecipeRecipe extends Schema.CollectionType {
         minLength: 2;
       }>;
     description: Attribute.Text;
+    coverImage: Attribute.Media;
+    tip: Attribute.Text;
+    steps: Attribute.RichText;
+    ingredients: Attribute.RichText;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

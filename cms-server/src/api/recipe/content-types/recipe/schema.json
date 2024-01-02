@@ -4,7 +4,8 @@
   "info": {
     "singularName": "recipe",
     "pluralName": "recipes",
-    "displayName": "食谱"
+    "displayName": "食谱",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,6 +19,26 @@
     },
     "description": {
       "type": "text"
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "tip": {
+      "type": "text"
+    },
+    "steps": {
+      "type": "richtext"
+    },
+    "ingredients": {
+      "type": "richtext"
     }
   }
 }
