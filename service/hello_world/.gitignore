@@ -1,0 +1,9 @@
+# Rust build artifacts
+target/
+
+# Cargo.lock is automatically generated for crates with `Cargo.toml`
+Cargo.lock
+
+# Dependency directories (remove the comment below to ignore these dirs)
+# ~/.cargo/
+
