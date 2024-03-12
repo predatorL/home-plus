@@ -16,8 +16,6 @@ onMounted(() => {
 <template>
   <div class="container">
     <h1>Welcome to Tita!</h1>
-    
-
   </div>
 </template>
 
