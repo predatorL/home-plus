@@ -382,8 +382,8 @@ export interface ApiRecipeRecipe extends Schema.CollectionType {
     description: Attribute.Text;
     coverImage: Attribute.Media;
     tip: Attribute.Text;
-    steps: Attribute.RichText;
-    ingredients: Attribute.RichText;
+    ingredients: Attribute.Component<'list.content-item', true>;
+    steps: Attribute.Component<'list.image-list', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

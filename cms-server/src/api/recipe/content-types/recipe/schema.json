@@ -34,11 +34,15 @@
     "tip": {
       "type": "text"
     },
-    "steps": {
-      "type": "richtext"
-    },
     "ingredients": {
-      "type": "richtext"
+      "type": "component",
+      "repeatable": true,
+      "component": "list.content-item"
+    },
+    "steps": {
+      "type": "component",
+      "repeatable": true,
+      "component": "list.image-list"
     }
   }
 }
