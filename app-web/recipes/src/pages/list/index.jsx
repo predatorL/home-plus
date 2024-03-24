@@ -5,6 +5,7 @@ import { Col, Card, Row } from 'antd';
 import {
   useNavigate
 } from "react-router-dom";
+import Image from '../../components/Image';
 
 const { Meta } = Card;
 
@@ -19,7 +20,7 @@ function RecipeListItem ({data, handleClick}) {
       hoverable
       onClick={onClick}
       style={{ width: 240 }}
-      cover={<img alt="example" src={attributes.coverIamge || "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"} />}
+      cover={<Image data={attributes?.coverImage} />}
     >
       <Meta title={attributes.name} description={attributes.description} />
     </Card>
