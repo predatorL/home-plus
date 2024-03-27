@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_list_image_lists",
+  "info": {
+    "displayName": "image-item",
+    "icon": "",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

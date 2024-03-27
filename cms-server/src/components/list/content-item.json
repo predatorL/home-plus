@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_list_content_items",
+  "info": {
+    "displayName": "content-item"
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    }
+  }
+}

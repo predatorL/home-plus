@@ -1,9 +1,9 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
-export interface ListContent extends Schema.Component {
-  collectionName: 'components_list_contents';
+export interface ListContentItem extends Schema.Component {
+  collectionName: 'components_list_content_items';
   info: {
-    displayName: 'content';
+    displayName: 'content-item';
   };
   attributes: {
     content: Attribute.String;
@@ -11,14 +11,15 @@ export interface ListContent extends Schema.Component {
   };
 }
 
-export interface ListImages extends Schema.Component {
-  collectionName: 'components_list_images';
+export interface ListImageList extends Schema.Component {
+  collectionName: 'components_list_image_lists';
   info: {
-    displayName: 'images';
-    icon: 'bulletList';
+    displayName: 'image-item';
+    icon: '';
+    description: '';
   };
   attributes: {
-    content: Attribute.String;
+    content: Attribute.Text;
     image: Attribute.Media;
   };
 }
@@ -26,8 +27,8 @@ export interface ListImages extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'list.content': ListContent;
-      'list.images': ListImages;
+      'list.content-item': ListContentItem;
+      'list.image-list': ListImageList;
     }
   }
 }
